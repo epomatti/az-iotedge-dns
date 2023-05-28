@@ -28,13 +28,6 @@ resource "azurerm_resource_group" "default" {
   location = var.location
 }
 
-### ACR ###
-module "acr" {
-  source   = "./modules/acr"
-  group    = azurerm_resource_group.default.name
-  location = azurerm_resource_group.default.location
-}
-
 ### IoT Hub ###
 module "iothub" {
   source       = "./modules/iothub"
@@ -55,8 +48,8 @@ module "network" {
 }
 
 # ### Network Security Group ###
-module "nsg" {
-  source   = "./modules/nsg"
+module "nsg-edgegateway" {
+  source   = "./modules/nsg-edgegateway"
   group    = azurerm_resource_group.default.name
   location = azurerm_resource_group.default.location
   workload = var.workload
@@ -77,6 +70,16 @@ module "edgegateway" {
   image_version = var.edgegateway_image_version
 }
 
+### Proxy ###
+module "proxy" {
+  source    = "./modules/proxy"
+  group     = azurerm_resource_group.default.name
+  location  = azurerm_resource_group.default.location
+  workload  = var.workload
+  subnet    = module.network.proxy_subnet_id
+  zone_name = module.network.zone_name
+}
+
 ### JSON Output ###
 resource "local_file" "config" {
   content = jsonencode(
@@ -86,6 +89,8 @@ resource "local_file" "config" {
       "resource_group_name" : "${azurerm_resource_group.default.name}",
       "root_ca_name" : "${module.iothub.certificate_name}",
       "iothub_hostname" : "${module.iothub.hostname}",
+      "proxy_public_ip" : "${module.proxy.public_ip}",
+      "proxy_private_ip" : "${module.proxy.private_ip}",
     }
   )
   filename = "output.json"
