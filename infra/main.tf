@@ -56,6 +56,24 @@ module "nsg-edgegateway" {
   subnet   = module.network.subnet_id
 }
 
+# module "nsg-proxy" {
+#   source   = "./modules/nsg-proxy"
+#   group    = azurerm_resource_group.default.name
+#   location = azurerm_resource_group.default.location
+#   workload = var.workload
+#   subnet   = module.network.proxy_subnet_id
+# }
+
+### Proxy ###
+module "proxy" {
+  source    = "./modules/proxy"
+  group     = azurerm_resource_group.default.name
+  location  = azurerm_resource_group.default.location
+  workload  = var.workload
+  subnet    = module.network.proxy_subnet_id
+  zone_name = module.network.zone_name
+}
+
 ### Edge Gateway ###
 module "edgegateway" {
   source        = "./modules/edgegateway"
@@ -68,16 +86,11 @@ module "edgegateway" {
   image_offer   = var.edgegateway_image_offer
   image_sku     = var.edgegateway_image_sku
   image_version = var.edgegateway_image_version
-}
 
-### Proxy ###
-module "proxy" {
-  source    = "./modules/proxy"
-  group     = azurerm_resource_group.default.name
-  location  = azurerm_resource_group.default.location
-  workload  = var.workload
-  subnet    = module.network.proxy_subnet_id
-  zone_name = module.network.zone_name
+  # To avoid any networking issues
+  depends_on = [
+    module.proxy
+  ]
 }
 
 ### JSON Output ###

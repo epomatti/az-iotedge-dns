@@ -1,7 +1,7 @@
 # https://learn.microsoft.com/en-us/azure/iot-edge/production-checklist?view=iotedge-1.4#allow-connections-from-iot-edge-devices
 
-resource "azurerm_network_security_group" "edgegateway_allow_ssh" {
-  name                = "nsg-${var.workload}-edgegateway"
+resource "azurerm_network_security_group" "proxy_allow_ssh" {
+  name                = "nsg-${var.workload}-proxy"
   location            = var.location
   resource_group_name = var.group
 
@@ -32,7 +32,7 @@ resource "azurerm_network_security_group" "edgegateway_allow_ssh" {
     source_port_range          = "*"
     destination_port_range     = "80"
     source_address_prefix      = "VirtualNetwork"
-    destination_address_prefix = "VirtualNetwork"
+    destination_address_prefix = "*"
   }
 
   security_rule {
@@ -45,7 +45,7 @@ resource "azurerm_network_security_group" "edgegateway_allow_ssh" {
     source_port_range          = "*"
     destination_port_ranges    = ["443", "8883", "5671"]
     source_address_prefix      = "VirtualNetwork"
-    destination_address_prefix = "VirtualNetwork"
+    destination_address_prefix = "*"
   }
 
   security_rule {
@@ -86,7 +86,7 @@ resource "azurerm_network_security_group" "edgegateway_allow_ssh" {
   }
 }
 
-resource "azurerm_subnet_network_security_group_association" "edgegateway" {
+resource "azurerm_subnet_network_security_group_association" "proxy" {
   subnet_id                 = var.subnet
-  network_security_group_id = azurerm_network_security_group.edgegateway_allow_ssh.id
+  network_security_group_id = azurerm_network_security_group.proxy_allow_ssh.id
 }
