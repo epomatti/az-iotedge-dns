@@ -1,0 +1,17 @@
+{
+    "version": "0.2",
+    "ignorePaths": [],
+    "dictionaryDefinitions": [],
+    "dictionaries": [],
+    "words": [
+        "aziot",
+        "aziotctl",
+        "bluefactory",
+        "edgegateway",
+        "iotedge",
+        "iothub",
+        "tshoot"
+    ],
+    "ignoreWords": [],
+    "import": []
+}
