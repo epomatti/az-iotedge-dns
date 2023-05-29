@@ -166,12 +166,12 @@ To force the DNS error, one possibility is to disable forwarding. Edit the Bind9
 sudo nano /etc/bind/named.conf.options
 ```
 
-Disable the forwarding by commenting the respective section:
+Disable the forwarding by setting these properties:
 
 ```options
-        // forwarders {
-        //         168.63.129.16;
-        // };
+forwarders {};
+
+recursion no;
 ```
 
 Also, add `forwarders {};` to the zone:
@@ -209,4 +209,7 @@ dig @10.0.90.4 edgegateway.bluefactory.local
 
 # Testing the IoT Hub
 dig @10.0.90.4 iot-bluefactory.azure-devices.net
+
+# With NSLOOKUP
+nslookup iot-bluefactory.azure-devices.net 10.0.90.4
 ```
