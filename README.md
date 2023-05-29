@@ -46,6 +46,27 @@ Restart the VM to activate any Linux kernel updates:
 az vm restart -n "vm-bluefactory-edgegateway" -g "rg-bluefactory"
 ```
 
+### 2 - Check the DNS provisioning
+
+```sh
+# Connect to the DNS server
+ssh dnsadmin@<public-ip>
+
+# Check if the cloud-init status is "done", otherwise wait with "--wait"
+cloud-init status
+
+# Check the DNS installation
+sudo systemctl status named
+```
+
+Restart the VM to activate any Linux kernel updates:
+
+```sh
+az vm restart -n "vm-dns-edgegateway" -g "rg-bluefactory"
+```
+
+
+
 ### 2 - Register the IoT Edge device
 
 Run the script to create the IoT Hub device registration:

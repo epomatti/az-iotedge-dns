@@ -34,7 +34,7 @@ resource "azurerm_linux_virtual_machine" "dns" {
   custom_data = filebase64("${path.module}/cloud-init.sh")
 
   admin_ssh_key {
-    username   = "dns"
+    username   = "dnsadmin"
     public_key = file("~/.ssh/id_rsa.pub")
   }
 
