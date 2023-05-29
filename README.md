@@ -2,6 +2,8 @@
 
 Azure IoT Edge runtime using a custom DNS.
 
+<img src=".assets/dns.png" width=700 />
+
 ## Infrastructure
 
 ### 1 - Create the resources
