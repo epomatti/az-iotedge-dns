@@ -11,6 +11,8 @@ remote_target_dir="/home/dnsadmin/"
 
 # Copy
 
-scp "./bind9/db.myzone.internal" "dnsadmin@$remote_dns_ip:$remote_target_dir"
+scp "./bind9/db.bluefactory.local" "dnsadmin@$remote_dns_ip:$remote_target_dir"
 scp "./bind9/named.conf.local" "dnsadmin@$remote_dns_ip:$remote_target_dir"
 scp "./bind9/named.conf.options" "dnsadmin@$remote_dns_ip:$remote_target_dir"
+
+scp "./bind9/dnsConfig.sh" "dnsadmin@$remote_dns_ip:$remote_target_dir"
