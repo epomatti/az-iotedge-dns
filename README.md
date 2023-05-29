@@ -105,7 +105,7 @@ Edit `/etc/resolv.conf` and change the DNS:
 nameserver 10.0.90.4
 ```
 
-### 2 - Register the IoT Edge device
+### 4 - Register the IoT Edge device
 
 Run the script to create the IoT Hub device registration:
 
@@ -135,7 +135,7 @@ sudo iotedge system logs
 sudo iotedge check
 ```
 
-### 3 - Deploy the modules
+### 5 - Deploy the modules
 
 Now that the device is properly registered and connected with IoT Hub, create a deployment:
 
