@@ -65,7 +65,31 @@ Restart the VM to activate any Linux kernel updates:
 az vm restart -n "vm-dns-edgegateway" -g "rg-bluefactory"
 ```
 
+### 3 - DNS Setup
 
+Upload the config files to the remote DNS server:
+
+```sh
+bash ./scripts/uploadBind9Config.sh
+```
+
+Connect to the DNS server and run the config script:
+
+```sh
+sudo bash dnsConfig.sh
+```
+
+Check the service status:
+
+```sh
+sudo systemctl status named
+```
+
+Edit `/etc/resolv.conf` and change the DNS:
+
+```
+nameserver 10.0.90.4
+```
 
 ### 2 - Register the IoT Edge device
 
