@@ -1,0 +1,14 @@
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     myzone.internal. admin.myzone.internal. (
+                              2         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      myzone.internal.
+@       IN      A       10.0.1.4
+app     IN      CNAME   app-myprivateapp.privatelink.azurewebsites.net.
