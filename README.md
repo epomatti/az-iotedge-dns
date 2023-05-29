@@ -88,9 +88,6 @@ sudo systemctl status named
 Testing the DNS resolution:
 
 ```sh
-# Testing the local DNS
-dig @10.0.90.4 dns.bluefactory.local
-
 # Testing the EdgeGateway
 dig @10.0.90.4 edgegateway.bluefactory.local
 
@@ -159,4 +156,57 @@ Check and confirm that everything is OK:
 
 ```sh
 sudo iotedge check
+```
+
+## Testing the DNS
+
+To force the DNS error, one possibility is to disable forwarding. Edit the Bind9 options:
+
+```sh
+sudo nano /etc/bind/named.conf.options
+```
+
+Disable the forwarding by commenting the respective section:
+
+```options
+        // forwarders {
+        //         168.63.129.16;
+        // };
+```
+
+Also, add `forwarders {};` to the zone:
+
+```sh
+sudo nano /etc/bind/named.conf.local
+```
+
+Configuration should look like this:
+
+```
+zone "bluefactory.local" {
+        type master;
+        file "/etc/bind/db.bluefactory.local";
+        notify no;
+        forwarders {};
+};
+```
+
+Save and restart the DNS:
+
+```sh
+# Restart the service
+sudo systemctl restart named
+
+# Check the status
+sudo systemctl status named
+```
+
+This should allow only registered entries to resolve, and all others to fail.
+
+```sh
+# Testing the EdgeGateway
+dig @10.0.90.4 edgegateway.bluefactory.local
+
+# Testing the IoT Hub
+dig @10.0.90.4 iot-bluefactory.azure-devices.net
 ```
