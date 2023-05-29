@@ -47,7 +47,7 @@ module "network" {
   private_zone_domain = local.private_zone_domain
 }
 
-# ### Network Security Group ###
+### Network Security Group ###
 module "nsg" {
   source   = "./modules/nsg"
   group    = azurerm_resource_group.default.name
