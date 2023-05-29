@@ -48,8 +48,8 @@ module "network" {
 }
 
 # ### Network Security Group ###
-module "nsg-edgegateway" {
-  source   = "./modules/nsg-edgegateway"
+module "nsg" {
+  source   = "./modules/nsg"
   group    = azurerm_resource_group.default.name
   location = azurerm_resource_group.default.location
   workload = var.workload
