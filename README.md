@@ -85,6 +85,21 @@ Check the service status:
 sudo systemctl status named
 ```
 
+Testing the DNS resolution:
+
+```sh
+# Testing the local DNS
+dig @10.0.90.4 dns.bluefactory.local
+
+# Testing the EdgeGateway
+dig @10.0.90.4 edgegateway.bluefactory.local
+
+# Testing the IoT Hub
+dig @10.0.90.4 iot-bluefactory.azure-devices.net
+```
+
+(OPTIONAL) You can change the DNS in the operating systems if required.
+
 Edit `/etc/resolv.conf` and change the DNS:
 
 ```
