@@ -56,24 +56,6 @@ module "nsg-edgegateway" {
   subnet   = module.network.subnet_id
 }
 
-# module "nsg-proxy" {
-#   source   = "./modules/nsg-proxy"
-#   group    = azurerm_resource_group.default.name
-#   location = azurerm_resource_group.default.location
-#   workload = var.workload
-#   subnet   = module.network.proxy_subnet_id
-# }
-
-### Proxy ###
-module "proxy" {
-  source    = "./modules/proxy"
-  group     = azurerm_resource_group.default.name
-  location  = azurerm_resource_group.default.location
-  workload  = var.workload
-  subnet    = module.network.proxy_subnet_id
-  zone_name = module.network.zone_name
-}
-
 ### Edge Gateway ###
 module "edgegateway" {
   source        = "./modules/edgegateway"
@@ -89,8 +71,18 @@ module "edgegateway" {
 
   # To avoid any networking issues
   depends_on = [
-    module.proxy
+    module.dns
   ]
+}
+
+### DNS ###
+module "dns" {
+  source    = "./modules/dns"
+  group     = azurerm_resource_group.default.name
+  location  = azurerm_resource_group.default.location
+  workload  = var.workload
+  subnet    = module.network.dns_subnet_id
+  zone_name = module.network.zone_name
 }
 
 ### JSON Output ###
@@ -102,8 +94,8 @@ resource "local_file" "config" {
       "resource_group_name" : "${azurerm_resource_group.default.name}",
       "root_ca_name" : "${module.iothub.certificate_name}",
       "iothub_hostname" : "${module.iothub.hostname}",
-      "proxy_public_ip" : "${module.proxy.public_ip}",
-      "proxy_private_ip" : "${module.proxy.private_ip}",
+      "dns_public_ip" : "${module.dns.public_ip}",
+      "dns_private_ip" : "${module.dns.private_ip}",
     }
   )
   filename = "output.json"

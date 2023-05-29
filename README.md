@@ -1,6 +1,6 @@
-# az-iotedge-proxy
+# Azure IoT Edge with Custom DNS
 
-Azure IoT Edge behind a reverse proxy
+Azure IoT Edge runtime using a custom DNS.
 
 ## Infrastructure
 

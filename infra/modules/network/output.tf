@@ -2,8 +2,8 @@ output "subnet_id" {
   value = azurerm_subnet.default.id
 }
 
-output "proxy_subnet_id" {
-  value = azurerm_subnet.proxy.id
+output "dns_subnet_id" {
+  value = azurerm_subnet.dns.id
 }
 
 output "zone_name" {

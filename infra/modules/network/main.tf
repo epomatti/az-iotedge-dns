@@ -12,8 +12,8 @@ resource "azurerm_subnet" "default" {
   address_prefixes     = ["10.0.0.0/24"]
 }
 
-resource "azurerm_subnet" "proxy" {
-  name                 = "subnet-proxy"
+resource "azurerm_subnet" "dns" {
+  name                 = "subnet-dns"
   resource_group_name  = var.group
   virtual_network_name = azurerm_virtual_network.default.name
   address_prefixes     = ["10.0.90.0/24"]
