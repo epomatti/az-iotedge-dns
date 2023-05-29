@@ -6,8 +6,8 @@
 // organization
 //include "/etc/bind/zones.rfc1918";
 
-zone "myzone.internal" {
+zone "bluefactory.local" {
         type master;
-        file "/etc/bind/db.myzone.internal";
+        file "/etc/bind/db.bluefactory.local";
         notify no;
 };

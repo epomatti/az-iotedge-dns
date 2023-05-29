@@ -15,7 +15,7 @@ sudo rm packages-microsoft-prod.deb
 sudo apt-get update
 sudo apt-get install moby-engine -y
 sudo touch /etc/docker/daemon.json
-echo '{ "log-driver": "local", "log-opts": { "max-size": "10m", "max-file": "3" }, "dns": ["168.63.129.16"] }' | sudo tee -a /etc/docker/daemon.json
+echo '{ "log-driver": "local", "log-opts": { "max-size": "10m", "max-file": "3" }, "dns": ["10.0.90.4"] }' | sudo tee -a /etc/docker/daemon.json
 sudo systemctl restart docker
 
 sudo apt-get update

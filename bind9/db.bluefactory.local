@@ -2,13 +2,13 @@
 ; BIND data file for local loopback interface
 ;
 $TTL    604800
-@       IN      SOA     myzone.internal. admin.myzone.internal. (
+@       IN      SOA     bluefactory.local. admin.bluefactory.local. (
                               2         ; Serial
                          604800         ; Refresh
                           86400         ; Retry
                         2419200         ; Expire
                          604800 )       ; Negative Cache TTL
 ;
-@       IN      NS      myzone.internal.
-@       IN      A       10.0.1.4
-app     IN      CNAME   app-myprivateapp.privatelink.azurewebsites.net.
+@               IN      NS      bluefactory.local.
+@               IN      A       10.0.90.4
+edgegateway     IN      A       10.0.0.4
