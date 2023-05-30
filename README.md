@@ -99,7 +99,7 @@ dig @10.0.90.4 edgegateway.bluefactory.local
 dig @10.0.90.4 iot-bluefactory.azure-devices.net
 ```
 
-### (Optional) Set DNS in the EdgeGateway host
+### 4 - (Optional) Set DNS in the EdgeGateway host
 
 You can change the DNS in the operating system of EdgeGateway if required.
 
