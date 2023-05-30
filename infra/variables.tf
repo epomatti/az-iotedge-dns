@@ -27,12 +27,12 @@ variable "edgegateway_vm_size" {
 
 variable "edgegateway_image_offer" {
   type    = string
-  default = "0001-com-ubuntu-server-focal"
+  default = "0001-com-ubuntu-server-jammy"
 }
 
 variable "edgegateway_image_sku" {
   type    = string
-  default = "20_04-lts-gen2"
+  default = "22_04-lts-gen2"
 }
 
 variable "edgegateway_image_version" {

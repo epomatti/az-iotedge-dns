@@ -56,6 +56,16 @@ module "nsg" {
   subnet   = module.network.subnet_id
 }
 
+### DNS ###
+module "dns" {
+  source    = "./modules/dns"
+  group     = azurerm_resource_group.default.name
+  location  = azurerm_resource_group.default.location
+  workload  = var.workload
+  subnet    = module.network.dns_subnet_id
+  zone_name = module.network.zone_name
+}
+
 ### Edge Gateway ###
 module "edgegateway" {
   source        = "./modules/edgegateway"
@@ -73,16 +83,6 @@ module "edgegateway" {
   depends_on = [
     module.dns
   ]
-}
-
-### DNS ###
-module "dns" {
-  source    = "./modules/dns"
-  group     = azurerm_resource_group.default.name
-  location  = azurerm_resource_group.default.location
-  workload  = var.workload
-  subnet    = module.network.dns_subnet_id
-  zone_name = module.network.zone_name
 }
 
 ### JSON Output ###
