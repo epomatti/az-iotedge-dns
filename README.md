@@ -64,7 +64,7 @@ sudo systemctl status named
 Restart the VM to activate any Linux kernel updates:
 
 ```sh
-az vm restart -n "vm-dns-edgegateway" -g "rg-bluefactory"
+az vm restart -n "vm-bluefactory-dns" -g "rg-bluefactory"
 ```
 
 ### 3 - DNS Setup
