@@ -63,6 +63,8 @@ sudo systemctl status named
 
 Restart the VM to activate any Linux kernel updates:
 
+> ℹ️ Check if there are no upgrades missing
+
 ```sh
 az vm restart -n "vm-bluefactory-dns" -g "rg-bluefactory"
 ```
@@ -97,7 +99,9 @@ dig @10.0.90.4 edgegateway.bluefactory.local
 dig @10.0.90.4 iot-bluefactory.azure-devices.net
 ```
 
-(OPTIONAL) You can change the DNS in the operating systems if required.
+### (Optional) Set DNS in the EdgeGateway host
+
+You can change the DNS in the operating system of EdgeGateway if required.
 
 Edit `/etc/resolv.conf` and change the DNS:
 
