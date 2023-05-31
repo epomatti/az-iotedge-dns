@@ -155,7 +155,7 @@ az iot edge deployment create --deployment-id "gateway" \
 To check the deployment in the EdgeGateway device:
 
 ```sh
-iotedge list
+sudo iotedge list
 ```
 
 Check and confirm that everything is OK:
