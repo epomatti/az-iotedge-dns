@@ -7,9 +7,13 @@
         "aziot",
         "aziotctl",
         "bluefactory",
+        "dnsadmin",
         "edgegateway",
         "iotedge",
         "iothub",
+        "nameserver",
+        "NSLOOKUP",
+        "resolv",
         "tshoot"
     ],
     "ignoreWords": [],
